@@ -1,0 +1,18 @@
+---
+- name: install net-misc/stunnel
+  portage: package=net-misc/stunnel
+  tags: [packages, install]
+
+- name: configure stunnel client
+  template: >
+    src=stunnel.conf.j2
+    dest=/etc/stunnel/stunnel.conf
+    owner=stunnel group=stunnel mode=0640
+  tags: config
+
+- name: enable and start stunnel
+  service: >
+    name=stunnel
+    enabled=yes
+    state=started
+  tags: services

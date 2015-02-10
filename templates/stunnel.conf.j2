@@ -1,0 +1,43 @@
+# {{ ansible_managed }}
+
+# Certificate/key is needed in server mode and optional in client mode
+cert = /etc/stunnel/stunnel.pem
+key = /etc/stunnel/stunnel.pem
+
+# setgid() to groupname in daemon mode and clears all other groups.
+setuid = stunnel
+
+# setuid() to username in daemon mode.
+setgid = stunnel
+
+# PID file location.
+pid = /run/stunnel/stunnel.pid
+
+# Some performance tunings
+socket = l:TCP_NODELAY=1
+socket = r:TCP_NODELAY=1
+
+# Select data compression algorithm: default (no compression), deflate, zlib,
+# or rle.
+#compression = default
+
+# Debugging level; one of the syslog level names or numbers emerg (0),
+# alert (1), crit (2), err (3), warning (4), notice (5), info (6),
+# or debug (7).
+debug = 6
+
+# Enable logging via syslog.
+syslog = yes
+
+# Use it for client mode.
+client = yes
+
+#
+# Service-level configuration
+#
+{% for id, opts in stunnel_services.iteritems() %}
+[{{ id }}]
+{%   for k, v in opts.iteritems() %}
+{{ k }} = {{ v }}
+{%   endfor %}
+{% endfor %}

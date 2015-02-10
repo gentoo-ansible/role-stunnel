@@ -1,0 +1,9 @@
+---
+# Specifies a service-level configuration.
+# Example:
+#   service1:
+#     accept: 7730
+#     connect: example.org:7730
+#   service2:
+#     ...
+stunnel_services: {}
