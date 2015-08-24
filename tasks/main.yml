@@ -8,6 +8,7 @@
     src=stunnel.conf.j2
     dest=/etc/stunnel/stunnel.conf
     owner=stunnel group=stunnel mode=0640
+  notify: restart stunnel
   tags: config
 
 - name: enable and start stunnel
